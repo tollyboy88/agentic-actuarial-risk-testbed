@@ -47,14 +47,14 @@ or recast as sensitivity/stress analyses.
 
 ## Reproducibility artefacts
 
-- `manifests/source_manifest.csv` — source URLs, commits, checksums, sizes and licences.
-- `manifests/rdata_conversion_manifest.csv` — Python R-object conversion and duplicates.
-- `manifests/rdata_native_fallback_manifest.csv` — native-R residual recovery and Parquet verification.
-- `manifests/open_table_conversion_manifest.csv` — official/open table conversions.
-- `manifests/data_object_manifest.csv` — every processed object, schema and missingness.
-- `manifests/key_dataset_profile.csv` — load-bearing record counts, schemas, roles and limitations.
-- `_scripts/` — acquisition, conversion, profiling and manifest scripts.
-- `acquisition-requirements.lock.txt` and `R_RUNTIME.md` — pinned Python and R tooling.
+- `manifests/source_manifest.csv` - source URLs, commits, checksums, sizes and licences.
+- `manifests/rdata_conversion_manifest.csv` - Python R-object conversion and duplicates.
+- `manifests/rdata_native_fallback_manifest.csv` - native-R residual recovery and Parquet verification.
+- `manifests/open_table_conversion_manifest.csv` - official/open table conversions.
+- `manifests/data_object_manifest.csv` - every processed object, schema and missingness.
+- `manifests/key_dataset_profile.csv` - load-bearing record counts, schemas, roles and limitations.
+- `_scripts/` - acquisition, conversion, profiling and manifest scripts.
+- `acquisition-requirements.lock.txt` and `R_RUNTIME.md` - pinned Python and R tooling.
 
 ## Gate decision
 
