@@ -1,0 +1,11 @@
+name: aat-full-factorial
+output_dir: outputs/full
+experiment:
+  seed: 20260901
+  n_worlds: 100
+  workers: 4
+  design: full
+  topologies: [T1_LINEAR, T2_VALIDATOR, T3_SUPERVISOR, T4_CRITIC, T5_HUMAN_K0, T5_HUMAN_K1, T5_HUMAN_K2, T5_HUMAN_K3]
+capital:
+  annual_simulations: 50000
+  systemic_simulations: 20000

@@ -1,0 +1,35 @@
+from enum import StrEnum
+
+
+class Stage(StrEnum):
+    INGEST = "S1_INGEST"
+    RECONCILE = "S2_RECONCILE"
+    SEGMENT = "S3_SEGMENT"
+    MODEL = "S4_MODEL"
+    SELECT = "S5_SELECT"
+    NARRATE = "S6_NARRATE"
+
+
+STAGE_ORDER = list(Stage)
+
+
+class FaultType(StrEnum):
+    DATA = "F1_DATA"
+    SEMANTIC = "F2_SEMANTIC"
+    TOOL = "F3_TOOL"
+    REASONING = "F4_REASONING"
+    HANDOFF = "F5_HANDOFF"
+    CONTEXT = "F6_CONTEXT"
+    ADVERSARIAL = "F7_ADVERSARIAL"
+
+
+class Topology(StrEnum):
+    LINEAR = "T1_LINEAR"
+    VALIDATOR = "T2_VALIDATOR"
+    SUPERVISOR = "T3_SUPERVISOR"
+    CRITIC = "T4_CRITIC"
+    HUMAN_0 = "T5_HUMAN_K0"
+    HUMAN_1 = "T5_HUMAN_K1"
+    HUMAN_2 = "T5_HUMAN_K2"
+    HUMAN_3 = "T5_HUMAN_K3"
+

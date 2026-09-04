@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AAT: API",
+      "type": "shell",
+      "command": "& '${workspaceFolder}\\data\\_tools\\.venv\\Scripts\\python.exe' -m uvicorn aat.dashboard_api:app --host 127.0.0.1 --port 8765",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "group": "aat", "reveal": "always" }
+    },
+    {
+      "label": "AAT: Web",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "${workspaceFolder}\\dashboard" },
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "group": "aat", "reveal": "always" }
+    },
+    {
+      "label": "AAT: Launch Dashboard",
+      "dependsOn": ["AAT: API", "AAT: Web"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    }
+  ]
+}

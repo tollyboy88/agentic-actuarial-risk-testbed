@@ -1,0 +1,33 @@
+# Python
+.venv/
+data/_tools/
+data/_scripts/
+data/*.zip
+JOURNAL_MANUSCRIPT_DRAFT.md
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# JavaScript
+dashboard/node_modules/
+dashboard/dist/
+dashboard/.vinext/
+*.tsbuildinfo
+
+# Third-party source datasets are inventoried but not redistributed
+data/raw/
+data/processed/
+data/derived/
+
+# Local and bulky run artefacts
+outputs/*/trajectories.sqlite
+outputs/*/tables/annual_losses.csv
+.env
+.env.*
+!.env.example
+
+# Office temporary and QA render files
+~$*
+submission/qa/
+submission/work/

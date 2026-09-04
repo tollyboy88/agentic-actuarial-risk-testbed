@@ -1,0 +1,17 @@
+warning: Benchmark-conditioned external ranges only. These quantities are not production
+  occurrence rates and are not used as annual capital frequencies.
+tau2:
+  simulations: 10832
+  failures: 3651
+  failure_rate: 0.3370568685376662
+  wilson_95:
+  - 0.3282139473716559
+  - 0.3460153252304834
+  result_files: 26
+agentdojo:
+  injection_runs: 33119
+  attack_successes: 27866
+  attack_success_rate: 0.8413901385911411
+  wilson_95:
+  - 0.8374161480069887
+  - 0.8452849400542483

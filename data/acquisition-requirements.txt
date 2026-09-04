@@ -1,0 +1,8 @@
+requests
+huggingface_hub
+rdata
+pyreadr
+pandas
+pyarrow
+openpyxl
+pypdf

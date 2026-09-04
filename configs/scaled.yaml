@@ -1,0 +1,15 @@
+name: aat-scaled-demonstration
+output_dir: outputs/scaled
+world:
+  n_policies: 300
+experiment:
+  seed: 20260901
+  n_worlds: 8
+  workers: 2
+  design: screening
+  topologies: [T1_LINEAR, T2_VALIDATOR, T3_SUPERVISOR, T4_CRITIC, T5_HUMAN_K0, T5_HUMAN_K1, T5_HUMAN_K2, T5_HUMAN_K3]
+  stages: [S1_INGEST, S2_RECONCILE, S3_SEGMENT, S4_MODEL, S5_SELECT, S6_NARRATE]
+  fault_types: [F1_DATA, F2_SEMANTIC, F3_TOOL, F4_REASONING, F5_HANDOFF, F6_CONTEXT, F7_ADVERSARIAL]
+capital:
+  annual_simulations: 10000
+  systemic_simulations: 5000

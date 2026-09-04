@@ -1,0 +1,18 @@
+source_path,object_name,rows,columns,parquet_path,status,note
+data/_scripts/aat_data_remote/solvency2_eiopa/EIOPA_SA_Balance_Sheet.csv,EIOPA_SA_Balance_Sheet,25415,8,data/processed/open_tables/solvency2_eiopa/EIOPA_SA_Balance_Sheet.parquet,verified,CSV parsed with cp1252; delimiter auto-detected.
+data/_scripts/aat_data_remote/solvency2_eiopa/EIOPA_SA_Own_Funds.csv,EIOPA_SA_Own_Funds,5562,8,data/processed/open_tables/solvency2_eiopa/EIOPA_SA_Own_Funds.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/solvency2_eiopa/EIOPA_SA_Premiums_Claims_Expenses.csv,EIOPA_SA_Premiums_Claims_Expenses,27528,8,data/processed/open_tables/solvency2_eiopa/EIOPA_SA_Premiums_Claims_Expenses.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/solvency2_eiopa/EIOPA_SQ_Balance_Sheet.csv,EIOPA_SQ_Balance_Sheet,224825,8,data/processed/open_tables/solvency2_eiopa/EIOPA_SQ_Balance_Sheet.parquet,verified,CSV parsed with cp1252; delimiter auto-detected.
+data/_scripts/aat_data_remote/solvency2_eiopa/EIOPA_SQ_Own_Funds.csv,EIOPA_SQ_Own_Funds,66872,8,data/processed/open_tables/solvency2_eiopa/EIOPA_SQ_Own_Funds.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/cas_schedule_p/comauto_pos.csv,comauto_pos,15800,13,data/processed/open_tables/cas_schedule_p/comauto_pos.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/cas_schedule_p/medmal_pos.csv,medmal_pos,3400,13,data/processed/open_tables/cas_schedule_p/medmal_pos.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/cas_schedule_p/othliab_pos.csv,othliab_pos,23900,13,data/processed/open_tables/cas_schedule_p/othliab_pos.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/cas_schedule_p/ppauto_pos.csv,ppauto_pos,14600,13,data/processed/open_tables/cas_schedule_p/ppauto_pos.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/cas_schedule_p/prodliab_pos.csv,prodliab_pos,7000,13,data/processed/open_tables/cas_schedule_p/prodliab_pos.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/cas_schedule_p/wkcomp_pos.csv,wkcomp_pos,13200,13,data/processed/open_tables/cas_schedule_p/wkcomp_pos.parquet,verified,CSV parsed with utf-8-sig; delimiter auto-detected.
+data/_scripts/aat_data_remote/huggingface_open/butterflylabs_ai-incidents.csv,butterflylabs_ai-incidents,6865,21,data/processed/open_tables/incidents/butterflylabs_ai-incidents.parquet,verified,CSV parsed with utf-8-sig.
+data/_scripts/aat_data_remote/aiid_excel/AIID_Excel_Export-20260831.xlsx,Incidents,1654,59,data/processed/open_tables/aiid/Incidents.parquet,verified,Sheet extracted from the latest dated AIID Excel snapshot.
+data/_scripts/aat_data_remote/aiid_excel/AIID_Excel_Export-20260831.xlsx,Reports,7680,12,data/processed/open_tables/aiid/Reports.parquet,verified,Sheet extracted from the latest dated AIID Excel snapshot.
+data/_scripts/aat_data_remote/aiid_excel/AIID_Excel_Export-20260831.xlsx,Entities,7138,2,data/processed/open_tables/aiid/Entities.parquet,verified,Sheet extracted from the latest dated AIID Excel snapshot.
+data/_scripts/aat_data_remote/aiid_excel/AIID_Excel_Export-20260831.xlsx,Data Dictionary,59,5,data/processed/open_tables/aiid/Data_Dictionary.parquet,verified,Sheet extracted from the latest dated AIID Excel snapshot.
+data/_scripts/aat_data_remote/aiid_excel/AIID_Excel_Export-20260831.xlsx,Coverage Map,6,4,data/processed/open_tables/aiid/Coverage_Map.parquet,verified,Sheet extracted from the latest dated AIID Excel snapshot.

@@ -1,0 +1,15 @@
+name: aat-smoke
+output_dir: outputs/smoke
+world:
+  n_policies: 100
+experiment:
+  seed: 20260901
+  n_worlds: 2
+  workers: 1
+  design: smoke
+  topologies: [T1_LINEAR, T2_VALIDATOR, T5_HUMAN_K1]
+  stages: [S1_INGEST, S4_MODEL, S6_NARRATE]
+  fault_types: [F1_DATA, F4_REASONING, F7_ADVERSARIAL]
+capital:
+  annual_simulations: 3000
+  systemic_simulations: 2000

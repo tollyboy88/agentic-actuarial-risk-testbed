@@ -1,0 +1,73 @@
+name: aat-scaled-demonstration
+output_dir: C:\Users\user\Documents\quantifying error propagation and operational
+  risk capital for agentic artificial intelligence in actuarial workflows\outputs\scaled
+world:
+  n_policies: 300
+  accident_years: 6
+  development_years: 6
+  start_year: 2019
+  valuation_year: 2025
+  ambient_duplicate_rate: 0.005
+  ambient_currency_rate: 0.15
+  base_currency: GBP
+experiment:
+  seed: 20260901
+  n_worlds: 8
+  workers: 2
+  design: screening
+  topologies:
+  - T1_LINEAR
+  - T2_VALIDATOR
+  - T3_SUPERVISOR
+  - T4_CRITIC
+  - T5_HUMAN_K0
+  - T5_HUMAN_K1
+  - T5_HUMAN_K2
+  - T5_HUMAN_K3
+  stages:
+  - S1_INGEST
+  - S2_RECONCILE
+  - S3_SEGMENT
+  - S4_MODEL
+  - S5_SELECT
+  - S6_NARRATE
+  fault_types:
+  - F1_DATA
+  - F2_SEMANTIC
+  - F3_TOOL
+  - F4_REASONING
+  - F5_HANDOFF
+  - F6_CONTEXT
+  - F7_ADVERSARIAL
+  fault_magnitude: 0.15
+  background_error_rate: 0.0
+  persist_stage_artifacts: false
+capital:
+  annual_workflows: 120
+  annual_simulations: 10000
+  loss_conversion_ratio: 0.05
+  remediation_cost: 5000.0
+  tail_threshold_quantile: 0.9
+  var_level: 0.995
+  fault_occurrence_probability:
+    F1_DATA: 0.015
+    F2_SEMANTIC: 0.012
+    F3_TOOL: 0.01
+    F4_REASONING: 0.018
+    F5_HANDOFF: 0.01
+    F6_CONTEXT: 0.008
+    F7_ADVERSARIAL: 0.003
+  systemic_firms: 20
+  systemic_rhos:
+  - 0.0
+  - 0.3
+  - 0.6
+  - 0.9
+  systemic_simulations: 5000
+costs:
+  token_price_per_million: 2.0
+  analyst_hourly_cost: 85.0
+  validator_tokens: 450
+  supervisor_tokens: 800
+  critic_tokens: 1100
+  human_checkpoint_minutes: 8.0

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: Agentic Actuarial Testbed
+message: If you use this software, please cite the accompanying manuscript and this repository.
+type: software
+authors:
+  - family-names: Adetola
+    given-names: Adebayo
+repository-code: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
+url: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
+license: MIT
+version: 0.1.0
+date-released: 2026-09-04
