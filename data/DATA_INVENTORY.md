@@ -19,7 +19,7 @@ upstream sources with exact provenance.
 
 The source-level manifest contains 298 verified acquisition records and no failed records.
 
-## 01 — Reserving and known-truth generation
+## 01 - Reserving and known-truth generation
 
 - CRAN ChainLadder, insuranceData, actuar and raw/Schedule P datasets.
 - SynthETIC individual-claim generator and SPLICE case-estimate development extension.
@@ -30,7 +30,7 @@ The source-level manifest contains 298 verified acquisition records and no faile
 **Research role:** known true ultimate, realistic triangles, smoke tests, independent
 generator robustness and external model-error benchmarks.
 
-## 02 — Motor pricing
+## 02 - Motor pricing
 
 - Full CASdatasets source including freMTPL/freMTPL2, European/Brazilian/Australian motor,
   pricing competitions, catastrophe and triangle data.
@@ -39,7 +39,7 @@ generator robustness and external model-error benchmarks.
 Previously unreadable Brazilian motor partitions and the Arrow-encoded 1,999,028-row
 European telematics table were recovered with native R and converted to verified Parquet.
 
-## 03 — Operational risk, EVT and capital context
+## 03 - Operational risk, EVT and capital context
 
 - OpVaR loss cells: four verified tables totalling 7,926 records.
 - evir, evd, ReIns, copula, rugarch and ggsolvencyii datasets/code.
@@ -51,7 +51,7 @@ European telematics table were recovered with native R and converted to verified
 exposure denominators. They support methodology, scale and calibration bounds—not an
 empirical industry capital parameter.
 
-## 04 — AI incidents and risk taxonomies
+## 04 - AI incidents and risk taxonomies
 
 - Dated AI Incident Database snapshot and workbook: 16,537 profiled rows across five
   sheets, including 1,654 incidents and 7,680 reports.
@@ -63,7 +63,7 @@ empirical industry capital parameter.
 **Research role:** taxonomy triangulation, discovery/control analogues and qualitative
 severity evidence. Incident-report selection bias prevents occurrence-rate inference.
 
-## 05 — Agentic failures
+## 05 - Agentic failures
 
 - MAST/MAD: 1,642 full traces across seven frameworks/eight benchmarks, plus 19
   human-labelled inter-annotator records; CC-BY-4.0.
@@ -76,7 +76,7 @@ severity evidence. Incident-report selection bias prevents occurrence-rate infer
 benchmark-conditioned success/failure denominators. Failure-only sets such as Who&When
 cannot estimate production occurrence rates.
 
-## 06 — Prompt injection and adversarial behavior
+## 06 - Prompt injection and adversarial behavior
 
 - AgentDojo: 36,679 JSON run artifacts for defended/undefended tool-use experiments.
 - InjecAgent: 2,108 base/enhanced rows representing 1,054 underlying scenarios.
@@ -107,7 +107,7 @@ dataset for a reproducible public bundle.
 
 ## Gate documents
 
-- `DATA_READINESS_REPORT.md` — final go/no-go by research question.
-- `DATA_GAP_REGISTER.md` — resolved and irreducible data gaps.
-- `REVISED_RESEARCH_SCOPE.md` — claims supportable by independent open data.
-- `ACQUISITION_PLAN.md` — acquisition policy and deliverables.
+- `DATA_READINESS_REPORT.md` - final go/no-go by research question.
+- `DATA_GAP_REGISTER.md` - resolved and irreducible data gaps.
+- `REVISED_RESEARCH_SCOPE.md` - claims supportable by independent open data.
+- `ACQUISITION_PLAN.md` - acquisition policy and deliverables.
