@@ -39,7 +39,7 @@ overclaiming.
 - A pre/post automation human-error study and actuarial time-and-motion/control-cost study.
 - External validation on gated TRAIL, GAIA or AgentRx after access terms are accepted.
 
-This revision preserves the core innovation—the quantitative bridge from controlled
+This revision preserves the core innovation, the quantitative bridge from controlled
 agentic failure to actuarial error and capital mechanics—while changing unsupported
 industry-wide estimates into transparent experimental and stress-test results.
 
