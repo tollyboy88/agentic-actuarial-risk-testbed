@@ -1,4 +1,4 @@
-# Agentic Actuarial Testbed — verified data inventory
+# Agentic Actuarial Testbed; verified data inventory
 
 **Project:** *When the model runs itself: quantifying error propagation and operational
 risk capital for agentic artificial intelligence in actuarial workflows*  
