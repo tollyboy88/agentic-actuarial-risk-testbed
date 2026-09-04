@@ -7,10 +7,10 @@ under `_scripts/aat_data_remote/`; public Hugging Face snapshots are under
 
 ## Excluded gated sources
 
-- TRAIL (`PatronusAI/TRAIL`) — gated Hugging Face dataset.
-- GAIA (`gaia-benchmark/GAIA`) — gated Hugging Face dataset.
-- AgentRx (`microsoft/AgentRx`) — access-gated Hugging Face dataset.
-- Kaggle mirrors/competitions — require accounts or acceptance of competition terms.
+- TRAIL (`PatronusAI/TRAIL`) - gated Hugging Face dataset.
+- GAIA (`gaia-benchmark/GAIA`) - gated Hugging Face dataset.
+- AgentRx (`microsoft/AgentRx`) - access-gated Hugging Face dataset.
+- Kaggle mirrors/competitions - require accounts or acceptance of competition terms.
 - OECD AIM bulk export and registered-only ORX publications.
 
 These are optional future external-validation sources. MAST/MAD, Who&When, tau2,
