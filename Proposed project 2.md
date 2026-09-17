@@ -1,8 +1,8 @@
-# TOPIC 2 — Agentic AI in the actuarial control cycle: error propagation and operational risk capital
+# TOPIC 2 - Agentic AI in the actuarial control cycle: error propagation and operational risk capital
 
 **Working title:** *When the model runs itself: quantifying error propagation and operational risk capital for agentic artificial intelligence in actuarial workflows*
 
-**Attacks gap:** G2 · **Simulation required: YES — load-bearing**
+**Attacks gap:** G2 · **Simulation required: YES - load-bearing**
 
 ### 2.1 The practitioner problem
 
@@ -20,12 +20,12 @@ BAJ has nothing on agentic systems at all. Outside BAJ, the Society of Actuaries
 
 **RQ1 (primary).** How does error introduced at one stage of an agentic actuarial pipeline propagate to the final actuarial output, and what does the resulting loss distribution imply for operational risk capital and ORSA disclosure?
 
-- **RQ2.1 — Amplification.** Is error amplified, attenuated or transformed at each hand-off? Is there a measurable "amplification factor" per stage archetype (ingest / clean / model / select / narrate)?
-- **RQ2.2 — Topology.** Do pipeline topologies differ materially in robustness — linear chain vs supervisor-and-workers vs debate/critic vs blackboard — at equal capability and equal cost?
-- **RQ2.3 — Detectability.** At which stage is an injected error cheapest to detect, and does the cheapest detection point coincide with where firms actually place their controls? (Hypothesis: it does not.)
-- **RQ2.4 — Autonomy dose-response.** As human-in-the-loop checkpoints are removed one at a time, how does the tail of the output-error distribution behave — smoothly, or with a threshold effect?
-- **RQ2.5 — Capital.** Fitting a frequency–severity model to simulated agentic failures, what operational risk capital charge results, and how does it compare with a firm's existing scenario-based op-risk assessment? Is the marginal capital impact of automation positive or negative once the reduction in *human* error is netted off?
-- **RQ2.6 — Correlation and systemic risk.** If many firms adopt the same foundation model and the same agent framework, are their operational losses correlated? What does that do to the sector-level tail, and is it a matter for the PRA and the Bank's macroprudential AI work?
+- **RQ2.1 - Amplification.** Is error amplified, attenuated or transformed at each hand-off? Is there a measurable "amplification factor" per stage archetype (ingest / clean / model / select / narrate)?
+- **RQ2.2 - Topology.** Do pipeline topologies differ materially in robustness: linear chain vs supervisor-and-workers vs debate/critic vs blackboard; at equal capability and equal cost?
+- **RQ2.3 - Detectability.** At which stage is an injected error cheapest to detect, and does the cheapest detection point coincide with where firms actually place their controls? (Hypothesis: it does not.)
+- **RQ2.4 - Autonomy dose-response.** As human-in-the-loop checkpoints are removed one at a time, how does the tail of the output-error distribution behave — smoothly, or with a threshold effect?
+- **RQ2.5 - Capital.** Fitting a frequency–severity model to simulated agentic failures, what operational risk capital charge results, and how does it compare with a firm's existing scenario-based op-risk assessment? Is the marginal capital impact of automation positive or negative once the reduction in *human* error is netted off?
+- **RQ2.6 - Correlation and systemic risk.** If many firms adopt the same foundation model and the same agent framework, are their operational losses correlated? What does that do to the sector-level tail, and is it a matter for the PRA and the Bank's macroprudential AI work?
 
 RQ2.6 is the ambitious one and the one that will get the paper discussed at a sessional meeting.
 
@@ -130,14 +130,14 @@ Open reserving data (`chainladder` sample triangles, Schedule P style, or the IF
 
 **Cost control.** The full factorial is large. Use a **screening design first** (Plackett–Burman or a fractional factorial) to find the 8–10 (fault, stage, topology) cells that matter, then run those at full replication. Cache aggressively; use a small open-weight model for the bulk runs and a frontier model for a validation subset, and report the sensitivity. Realistically £400–£900 of inference.
 
-**Stack.** `langgraph` or a hand-rolled typed state machine (I would hand-roll it — it makes the paper's method section far clearer and removes a framework dependency reviewers can't inspect) · `pydantic` schemas at every hand-off · `chainladder-python` · `scipy`/`copulas` for Section E · `sqlite` trajectory store.
+**Stack.** `langgraph` or a hand-rolled typed state machine (I would hand-roll it; it makes the paper's method section far clearer and removes a framework dependency reviewers can't inspect) · `pydantic` schemas at every hand-off · `chainladder-python` · `scipy`/`copulas` for Section E · `sqlite` trajectory store.
 
 ### 2.7 Context engineering specification
 
-- **Typed hand-offs.** Every inter-agent message is a Pydantic model with explicit units and provenance fields. A schema violation is a *hard* failure and must be recorded as such — this lets you show that schema discipline converts silent failures into hard ones, which is itself a finding worth a paragraph in the recommendations.
-- **Bounded context per stage.** Each agent sees only its input artefact plus a stage-specific instruction — never the whole conversation history. Measure the effect of relaxing this (the "context contamination" arm).
+- **Typed hand-offs.** Every inter-agent message is a Pydantic model with explicit units and provenance fields. A schema violation is a *hard* failure and must be recorded as such; this lets you show that schema discipline converts silent failures into hard ones, which is itself a finding worth a paragraph in the recommendations.
+- **Bounded context per stage.** Each agent sees only its input artefact plus a stage-specific instruction; never the whole conversation history. Measure the effect of relaxing this (the "context contamination" arm).
 - **Tool-first arithmetic.** No agent is permitted to compute a number in prose. All arithmetic goes through a tool. This is both good engineering and a recommendation the paper can make to the profession.
 - **Provenance chain.** Every field in the final reserve pack carries a lineage pointer back to a raw bordereau row. The paper can then report *lineage completeness* as a control metric.
-- **Adversarial arm (F7).** Claim free-text fields containing injected instructions — realistic, since claim narratives are customer-supplied. Almost nobody in the actuarial literature has considered this.
+- **Adversarial arm (F7).** Claim free-text fields containing injected instructions are realistic, since claim narratives are customer-supplied. Almost nobody in the actuarial literature has considered this.
 
 ---
