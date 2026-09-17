@@ -39,7 +39,3 @@ The random seed, resolved configuration, source inventories, and data-readiness/
 The local AAT Control Room is in `dashboard/`. It displays the verified result sets, compares architectures and fault classes, plots capital and systemic dependence, queries trajectory events, and can launch the approved smoke or scaled profiles.
 
 See `dashboard/README.md` for installation and VS Code launch instructions. With the existing environment, use **Terminal → Run Task → AAT: Launch Dashboard**, then open `http://localhost:3000`.
-
-## Journal submission package
-
-The journal-targeted manuscript, title page, cover letter, supplementary material, editable tables, and high-resolution figures are in `submission/final/`. The package targets the standard subscription route of the *Scandinavian Actuarial Journal*; the research decision and evidence ledger are in `submission/research/`.
