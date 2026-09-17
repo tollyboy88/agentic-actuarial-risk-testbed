@@ -1,6 +1,6 @@
 # Agentic Actuarial Testbed
 
-A reproducible prototype for studying how errors propagate through agentic actuarial workflows and how alternative controls change scenario-conditioned operational risk capital.
+A reproducible simulation testbed for studying how errors propagate through agentic-style actuarial workflows and how alternative controls change scenario-conditioned operational risk. It does not claim to measure deployed language-model agents or insurer regulatory capital.
 
 Public repository: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
 
@@ -9,6 +9,8 @@ Public repository: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
 The model creates synthetic, known-truth insurance portfolios and passes them through six stages: ingestion, reconciliation, segmentation, reserving model, actuarial selection, and narrative. It injects seven fault classes, compares five control/topology families, saves complete trajectories, and measures outcomes against paired no-fault runs from the same synthetic world.
 
 Capital results are scenarios—not estimates of real industry loss frequency or regulatory capital. Production occurrence frequencies, human-review performance, control placement, and cross-firm dependence require partner-firm evidence.
+
+The reviewer-revision analyses add unrestricted CLRD2025 retrospective validation across six lines of business, 750 public-data fault injections, ±20%/±40% detection stresses, a 135-combination capital grid, 95% bootstrap/Monte Carlo intervals, and component ablations. Run them with `aat-sim robustness --config configs\scaled.yaml`.
 
 ## Run
 
@@ -26,8 +28,9 @@ For the larger demonstration, replace `smoke.yaml` with `scaled.yaml`. `full.yam
 - `stage_metrics.parquet`: stage-by-stage propagation
 - `trajectories.sqlite`: auditable events and snapshots
 - `tables/`: severity, capital, systemic stress, and optimization outputs
-- `figures/`: five publication-oriented figures
+- `figures/`: publication-oriented figures
 - `REPORT.md`: ORSA-oriented interpretation and evidential boundary
+- `outputs/reviewer_revision/`: CLRD2025 validation, sensitivity, ranking-stability, and ablation results
 
 The random seed, resolved configuration, source inventories, and data-readiness/gap reports make each experiment replayable.
 

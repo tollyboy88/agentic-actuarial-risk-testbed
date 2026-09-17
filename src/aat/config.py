@@ -34,6 +34,9 @@ class ExperimentConfig(BaseModel):
     fault_magnitude: float = Field(0.15, gt=0, le=5)
     background_error_rate: float = Field(0.0, ge=0, le=0.25)
     persist_stage_artifacts: bool = False
+    detection_scale: float = Field(1.0, ge=0, le=3)
+    disabled_controls: set[str] = Field(default_factory=set)
+    replay_enabled: bool = True
 
 
 class CapitalConfig(BaseModel):
@@ -88,4 +91,3 @@ def load_config(path: str | Path) -> SimulationConfig:
     if not config.output_dir.is_absolute():
         config.output_dir = (source.resolve().parent.parent / config.output_dir).resolve()
     return config
-

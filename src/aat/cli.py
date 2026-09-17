@@ -9,11 +9,12 @@ from .config import load_config
 from .experiment import run_experiment
 from .reporting import build_report
 from .dashboard import export_dashboard_payload
+from .robustness import build_reviewer_revision
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="aat-sim", description="Agentic actuarial workflow risk simulator")
-    parser.add_argument("command", choices=["calibrate", "run", "report", "all"])
+    parser.add_argument("command", choices=["calibrate", "run", "report", "robustness", "all"])
     parser.add_argument("--config", required=True)
     args = parser.parse_args()
     config = load_config(args.config)
@@ -28,6 +29,8 @@ def main() -> None:
     if args.command in {"report", "all"}:
         print(build_report(config))
         print(export_dashboard_payload(config.output_dir.parent.parent, config.output_dir.name))
+    if args.command == "robustness":
+        print(build_reviewer_revision(args.config))
     print(f"elapsed_seconds={time.perf_counter() - started:.2f}")
 
 

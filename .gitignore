@@ -31,3 +31,10 @@ outputs/*/tables/annual_losses.csv
 ~$*
 submission/qa/
 submission/work/
+submission/rendered_review*/
+reviewer_comments.json
+
+# Reproducible reviewer-analysis intermediates; retain the compact CSV summaries
+outputs/reviewer_revision/runs/
+outputs/reviewer_revision/ablations/
+outputs/reviewer_revision/tables/*.parquet

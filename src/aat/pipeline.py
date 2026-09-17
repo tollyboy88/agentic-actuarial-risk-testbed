@@ -49,6 +49,8 @@ def run_pipeline(world: WorldData, spec: RunSpec, config: SimulationConfig) -> R
             outcome = inspect_fault(
                 state, spec.topology, stage, state.active_fault,
                 config.experiment.seed, config.costs,
+                config.experiment.detection_scale,
+                config.experiment.disabled_controls,
             )
             # Inspection cost is already included in the topology's routine stage cost.
             state.events.append({
@@ -60,23 +62,31 @@ def run_pipeline(world: WorldData, spec: RunSpec, config: SimulationConfig) -> R
                 prior_tokens, prior_minutes = state.token_cost, state.analyst_minutes
                 if pre_fault_state is None:
                     raise RuntimeError("fault recovery state is unavailable")
-                state = deepcopy(pre_fault_state)
-                state.events = prior_events
-                state.token_cost = prior_tokens
-                state.analyst_minutes = prior_minutes
-                state.detected = True
-                state.detection_stage = stage
-                injection_index = STAGE_ORDER.index(spec.injection_stage) if spec.injection_stage else 0
-                current_index = STAGE_ORDER.index(stage)
-                for replay_stage in STAGE_ORDER[injection_index:current_index]:
-                    STAGE_FUNCTIONS[replay_stage](state, config.world)
+                if config.experiment.replay_enabled:
+                    state = deepcopy(pre_fault_state)
+                    state.events = prior_events
+                    state.token_cost = prior_tokens
+                    state.analyst_minutes = prior_minutes
+                    state.detected = True
+                    state.detection_stage = stage
+                    injection_index = STAGE_ORDER.index(spec.injection_stage) if spec.injection_stage else 0
+                    current_index = STAGE_ORDER.index(stage)
+                    for replay_stage in STAGE_ORDER[injection_index:current_index]:
+                        STAGE_FUNCTIONS[replay_stage](state, config.world)
+                        state.events.append({
+                            "stage": replay_stage, "event_type": "stage_replayed_after_detection",
+                        })
                     state.events.append({
-                        "stage": replay_stage, "event_type": "stage_replayed_after_detection",
+                        "stage": stage, "event_type": "fault_repaired",
+                        "repair": "restore_and_replay_from_clean_state",
                     })
-                state.events.append({
-                    "stage": stage, "event_type": "fault_repaired",
-                    "repair": "restore_and_replay_from_clean_state",
-                })
+                else:
+                    state.detected = True
+                    state.detection_stage = stage
+                    state.events.append({
+                        "stage": stage, "event_type": "fault_detected_not_repaired",
+                        "repair": "disabled_for_ablation",
+                    })
 
         try:
             STAGE_FUNCTIONS[stage](state, config.world)

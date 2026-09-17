@@ -1,8 +1,8 @@
 # Agentic Actuarial Testbed; verified data inventory
 
-**Project:** *When the model runs itself: quantifying error propagation and operational
-risk capital for agentic artificial intelligence in actuarial workflows*  
-**Verified:** 1 September 2026
+**Project:** *Quantifying error propagation in simulated agentic actuarial workflows: a
+reproducible operational-risk testbed*  
+**Verified:** 17 September 2026
 
 The four originally supplied archives contained only about 25 MB compressed and did not
 match the former 2.8 GB inventory claim. The collection has been repaired from open

@@ -34,7 +34,11 @@ Cross-firm stress uses a Gaussian copula with prescribed correlations of 0, 0.3,
 4. End-to-end persistence to Parquet and relational SQLite tables.
 5. Capital aggregation produces the requested simulation count.
 6. A 1,024-run scaled screening design completed with no execution failures.
+7. CLRD2025 retrospective validation completed across six lines and 772 insurer-line records, with 100 insurer-cluster resamples per line.
+8. A 750-case public-data fault audit, five-level detection sensitivity, 135-combination capital grid, and nine control ablations completed.
 
-## Required publication sensitivity work
+## Reviewer-revision robustness work
 
-Before treating numeric results as publishable estimates, run the full replication design and vary fault magnitudes, annual frequencies, detection curves, loss-conversion ratios, GPD thresholds, and dependence structures. Add bootstrap intervals by world, compare Poisson with negative-binomial frequency, and validate a subset against an independently implemented reserving engine. Partner-firm data are required for external calibration; absent that, conclusions must remain scenario-conditioned.
+The robustness command rescales detection probabilities to 60%, 80%, 100%, 120%, and 140% of base and crosses these with fault-occurrence multipliers 0.5/1/2, economic-conversion ratios 1%/5%/10%, and remediation costs GBP 1,000/5,000/10,000. World-bootstrap intervals cover detection and unresolved failure; Monte Carlo resampling covers VaR. Ablations separately remove broad stage validation, replay/recovery, supervisor review, and human checkpoints. Run with `aat-sim robustness --config configs/scaled.yaml`.
+
+Remaining work for external calibration requires partner-firm incidents and review outcomes. A future live-agent study should preregister frozen prompts and tools and repeat trials across multiple model families. Until then, conclusions remain scenario-conditioned.

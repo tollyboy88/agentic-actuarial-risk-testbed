@@ -12,6 +12,7 @@ from aat.experiment import run_experiment
 from aat.ground_truth import generate_world
 from aat.models import RunSpec
 from aat.pipeline import run_pipeline
+from aat.controls import detection_probability
 
 
 def test_config_and_world_are_reproducible():
@@ -60,3 +61,15 @@ def test_end_to_end_tiny_experiment(tmp_path):
         assert connection.execute("SELECT COUNT(*) FROM runs").fetchone()[0] == 2
     capital, annual, severity = simulate_capital(runs, config)
     assert len(capital) == 1 and len(annual) == 2000 and len(severity) == 1
+
+
+def test_detection_sensitivity_and_ablation_switches():
+    low, _ = detection_probability(Topology.VALIDATOR, Stage.MODEL, FaultType.REASONING, 0.6)
+    high, _ = detection_probability(Topology.VALIDATOR, Stage.MODEL, FaultType.REASONING, 1.4)
+    disabled, control = detection_probability(
+        Topology.VALIDATOR, Stage.MODEL, FaultType.REASONING, 1.0,
+        {"typed_stage_validator"},
+    )
+    assert low < high
+    assert disabled < low
+    assert control == "implicit_runtime_check"

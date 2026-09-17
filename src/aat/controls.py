@@ -37,7 +37,14 @@ def stage_control_cost(topology: Topology, stage: Stage, costs: CostConfig) -> t
     return 0, 0.0
 
 
-def detection_probability(topology: Topology, stage: Stage, fault: FaultType) -> tuple[float, str]:
+def detection_probability(
+    topology: Topology,
+    stage: Stage,
+    fault: FaultType,
+    detection_scale: float = 1.0,
+    disabled_controls: set[str] | None = None,
+) -> tuple[float, str]:
+    disabled = disabled_controls or set()
     if topology is Topology.LINEAR or topology is Topology.HUMAN_0:
         probability, control = 0.025, "implicit_runtime_check"
     elif topology is Topology.VALIDATOR:
@@ -61,11 +68,22 @@ def detection_probability(topology: Topology, stage: Stage, fault: FaultType) ->
         FaultType.CONTEXT: 0.72,
         FaultType.ADVERSARIAL: 0.62,
     }
-    probability *= modifiers[fault]
-    if fault is FaultType.ADVERSARIAL and topology in {Topology.VALIDATOR, Topology.SUPERVISOR}:
+    if control in disabled:
+        probability, control = 0.025, "implicit_runtime_check"
+
+    probability *= modifiers[fault] * detection_scale
+    if (
+        fault is FaultType.ADVERSARIAL
+        and topology in {Topology.VALIDATOR, Topology.SUPERVISOR}
+        and "prompt_sanitizer_and_policy_check" not in disabled
+    ):
         probability = max(probability, 0.82)
         control = "prompt_sanitizer_and_policy_check"
-    if fault is FaultType.HANDOFF and topology in {Topology.VALIDATOR, Topology.SUPERVISOR}:
+    if (
+        fault is FaultType.HANDOFF
+        and topology in {Topology.VALIDATOR, Topology.SUPERVISOR}
+        and "schema_and_lineage_check" not in disabled
+    ):
         probability = max(probability, 0.93)
         control = "schema_and_lineage_check"
     return min(max(probability, 0.0), 0.995), control
@@ -78,10 +96,13 @@ def inspect_fault(
     fault: FaultType,
     experiment_seed: int,
     costs: CostConfig,
+    detection_scale: float = 1.0,
+    disabled_controls: set[str] | None = None,
 ) -> DetectionOutcome:
-    probability, control = detection_probability(topology, stage, fault)
+    probability, control = detection_probability(
+        topology, stage, fault, detection_scale, disabled_controls,
+    )
     token_cost, analyst_minutes = stage_control_cost(topology, stage, costs)
     rng = rng_for(experiment_seed, state.world.world_id, topology, stage, fault, "detection")
     detected = bool(rng.random() < probability)
     return DetectionOutcome(detected, probability, control, token_cost, analyst_minutes)
-
