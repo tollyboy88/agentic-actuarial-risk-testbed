@@ -1,6 +1,6 @@
 # Data readiness gate
 
-**Status: CONDITIONALLY READY; SIMULATION REMAINS PAUSED.**  
+**Status: CONDITIONALLY READY;**  
 **Gate date:** 1 September 2026
 
 The data layer is ready for a scalable prototype **only under the revised scope in
@@ -56,9 +56,3 @@ or recast as sensitivity/stress analyses.
 - `_scripts/` - acquisition, conversion, profiling and manifest scripts.
 - `acquisition-requirements.lock.txt` and `R_RUNTIME.md` - pinned Python and R tooling.
 
-## Gate decision
-
-Do **not** begin the simulation from the unmodified proposal. Once the revised scope is
-accepted as the study specification, the data prerequisite is satisfied and prototype
-engineering may begin. No paid or gated dataset is required for the independent core
-study.
