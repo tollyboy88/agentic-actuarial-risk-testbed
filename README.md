@@ -8,7 +8,7 @@ Public repository: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
 
 The model creates synthetic, known-truth insurance portfolios and passes them through six stages: ingestion, reconciliation, segmentation, reserving model, actuarial selection, and narrative. It injects seven fault classes, compares five control/topology families, saves complete trajectories, and measures outcomes against paired no-fault runs from the same synthetic world.
 
-Capital results are scenarios—not estimates of real industry loss frequency or regulatory capital. Production occurrence frequencies, human-review performance, control placement, and cross-firm dependence require partner-firm evidence.
+Capital results are scenarios; not estimates of real industry loss frequency or regulatory capital. Production occurrence frequencies, human-review performance, control placement, and cross-firm dependence require partner-firm evidence.
 
 The reviewer-revision analyses add unrestricted CLRD2025 retrospective validation across six lines of business, 750 public-data fault injections, ±20%/±40% detection stresses, a 135-combination capital grid, 95% bootstrap/Monte Carlo intervals, and component ablations. Run them with `aat-sim robustness --config configs\scaled.yaml`.
 
