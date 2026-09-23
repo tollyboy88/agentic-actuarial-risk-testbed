@@ -4,9 +4,17 @@ message: If you use this software, please cite the accompanying manuscript and t
 type: software
 authors:
   - family-names: Adetola
-    given-names: Adebayo
+    given-names: Adebayo Aliu
+    orcid: https://orcid.org/0009-0002-1995-6400
+  - family-names: Akinade
+    given-names: Olugbenga
+    orcid: https://orcid.org/0000-0003-3950-3775
 repository-code: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
 url: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
 license: MIT
-version: 0.1.0
-date-released: 2026-09-04
+version: 1.0.0
+date-released: 2026-09-23
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22821051
+    description: Open dataset archive used by the reproducibility package

@@ -39,3 +39,20 @@ The random seed, resolved configuration, source inventories, and data-readiness/
 The local AAT Control Room is in `dashboard/`. It displays the verified result sets, compares architectures and fault classes, plots capital and systemic dependence, queries trajectory events, and can launch the approved smoke or scaled profiles.
 
 See `dashboard/README.md` for installation and VS Code launch instructions. With the existing environment, use **Terminal → Run Task → AAT: Launch Dashboard**, then open `http://localhost:3000`.
+## Split-paper submission packages
+
+The rejected combined article has been separated into two non-overlapping papers:
+
+- **Paper 1 — empirical software testbed:** the primary package targets the *North American Actuarial Journal* in `papers/paper1_naaj/`; `papers/paper1_aas/` is a prepared fallback for the *Annals of Actuarial Science* software stream.
+- **Paper 2 — Bayesian methodology:** the package in `papers/paper2_saj/` targets the *Scandinavian Actuarial Journal* and develops the multistate inference, validation, and control-placement method.
+
+Each journal folder contains the required manuscript variants, cover letter, supplementary/replication material, and separate 300-dpi figures. The open dataset is archived at [Zenodo](https://doi.org/10.5281/zenodo.22821051); the public code repository is [agentic-actuarial-risk-testbed](https://github.com/tollyboy88/agentic-actuarial-risk-testbed).
+
+Reproduce the frozen paper results with:
+
+```powershell
+python scripts/reproduce_naaj.py
+python scripts/reproduce_saj.py
+```
+
+The AAS fallback has a deliberate submission gate: before uploading there, confirm source-file ownership, relicense the repository under GPL-3.0-only, create a matching archival release, and update its DOI/version statements. See `papers/paper1_aas/README.md`.

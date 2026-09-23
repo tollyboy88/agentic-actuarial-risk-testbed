@@ -1,0 +1,4 @@
+Dataset: https://doi.org/10.5281/zenodo.22821051
+Code: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
+Release: v1.0.0
+Commands: python scripts/reproduce_naaj.py; python -m pytest

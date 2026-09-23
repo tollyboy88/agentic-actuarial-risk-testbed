@@ -26,6 +26,8 @@ outputs/*/tables/annual_losses.csv
 .env
 .env.*
 !.env.example
+Data_Act.zip
+submission/final.zip
 
 # Office temporary and QA render files
 ~$*

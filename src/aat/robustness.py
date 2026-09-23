@@ -237,12 +237,27 @@ def run_real_data_fault_audit(source: Path, output: Path) -> pd.DataFrame:
                 diffs = corrupted.sort_values(["AccidentYear", "DevelopmentLag"]).groupby("AccidentYear")["CumPaidLoss"].diff()
                 positive = diffs.loc[diffs > 0]
                 extreme = bool(len(positive) and positive.max() > max(positive.median() * 100, 1_000_000))
-                detected = bool(duplicate or negative or mismatch or missing or extreme)
+                scale_ratio = 0.0
+                unit_scale = False
+                if fault == "unit_x1000":
+                    target_row = corrupted.loc[target]
+                    peer = corrupted.loc[
+                        (corrupted["AccidentYear"] == target_row["AccidentYear"])
+                        & (corrupted.index != target), "CumPaidLoss"
+                    ].abs()
+                    peer = peer.loc[peer > 0]
+                    peer_median = float(peer.median()) if len(peer) else 0.0
+                    scale_ratio = abs(float(target_row["CumPaidLoss"])) / max(peer_median, 1.0)
+                    unit_scale = bool(scale_ratio > 100)
+                detected_legacy = bool(duplicate or negative or mismatch or missing or extreme)
+                detected = bool(detected_legacy or unit_scale)
                 rows.append({
                     "lob": lob, "grcode": insurer, "fault": fault, "detected": detected,
+                    "detected_legacy": detected_legacy,
                     "duplicate_check": bool(duplicate), "nonnegative_check": bool(negative),
                     "development_check": bool(mismatch), "completeness_check": bool(missing),
-                    "extreme_increment_check": bool(extreme),
+                    "extreme_increment_check": bool(extreme), "unit_scale_check": unit_scale,
+                    "target_to_peer_median_ratio": scale_ratio,
                 })
     audit = pd.DataFrame(rows)
     _write(audit, output / "tables" / "clrd_fault_audit.csv")
