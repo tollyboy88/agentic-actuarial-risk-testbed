@@ -44,15 +44,14 @@ See `dashboard/README.md` for installation and VS Code launch instructions. With
 The rejected combined article has been separated into two non-overlapping papers:
 
 - **Paper 1 — empirical software testbed:** the primary package targets the *North American Actuarial Journal* in `papers/paper1_naaj/`; `papers/paper1_aas/` is a prepared fallback for the *Annals of Actuarial Science* software stream.
-- **Paper 2 — Bayesian methodology:** the package in `papers/paper2_saj/` targets the *Scandinavian Actuarial Journal* and develops the multistate inference, validation, and control-placement method.
+- **Paper 2 — Bayesian methodology:** maintained separately at [bayesian-multistate-actuarial-workflows](https://github.com/tollyboy88/bayesian-multistate-actuarial-workflows), with its own posterior-analysis code and Bayesian Workflow Laboratory dashboard.
 
-Each journal folder contains the required manuscript variants, cover letter, supplementary/replication material, and separate 300-dpi figures. The open dataset is archived at [Zenodo](https://doi.org/10.5281/zenodo.22821051); the public code repository is [agentic-actuarial-risk-testbed](https://github.com/tollyboy88/agentic-actuarial-risk-testbed).
+The open dataset is shared through [Zenodo](https://doi.org/10.5281/zenodo.22821051). This repository contains the Paper 1 experimental engine and operational dashboard; Paper 2 has a separate code and visualisation repository.
 
 Reproduce the frozen paper results with:
 
 ```powershell
 python scripts/reproduce_naaj.py
-python scripts/reproduce_saj.py
 ```
 
 The AAS fallback has a deliberate submission gate: before uploading there, confirm source-file ownership, relicense the repository under GPL-3.0-only, create a matching archival release, and update its DOI/version statements. See `papers/paper1_aas/README.md`.

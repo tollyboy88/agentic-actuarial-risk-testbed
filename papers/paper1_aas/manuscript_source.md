@@ -98,11 +98,11 @@ Nine ablation runs removed schema/lineage validation, prompt sanitisation, the g
 
 ### 3.9 Implementation and user interface
 
-The Python package exposes a command-line interface, YAML configuration, Parquet/CSV tables, SQLite event trajectories and a local dashboard. `scripts/reproduce_naaj.py` regenerates the fixed applied study; `scripts/reproduce_saj.py` builds the probabilistic extension. A run manifest stores SHA-256 hashes, and `REPRODUCIBILITY.md` gives installation and resource instructions.
+The Python package exposes a command-line interface, YAML configuration, Parquet/CSV tables, SQLite event trajectories and a local operational dashboard. `scripts/reproduce_naaj.py` regenerates the fixed applied study. A run manifest stores SHA-256 hashes, and `REPRODUCIBILITY.md` gives installation and resource instructions.
 
 ### 3.10 Unit Testing and Validation
 
-The test suite checks deterministic seeds, unique run identifiers, six stage records per run, transition probabilities, analytic state recursion, known-parameter recovery and required publication outputs. Nine tests pass in the frozen environment. The smoke profile supports rapid installation checks; the scaled profile recreates the reported 1,024-run study.
+The test suite checks deterministic seeds, unique run identifiers, six stage records per run and required publication outputs. The smoke profile supports rapid installation checks; the scaled profile recreates the reported 1,024-run study.
 
 ## 4. Results
 

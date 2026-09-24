@@ -29,6 +29,16 @@ outputs/*/tables/annual_losses.csv
 Data_Act.zip
 submission/final.zip
 
+# Paper 2 is maintained in its separate methodology repository
+outputs/saj_methodology/
+papers/paper2_saj/
+src/aat/probabilistic/
+scripts/reproduce_saj.py
+scripts/prepare_split_submissions.py
+tests/test_probabilistic.py
+papers/assets/model_scores.png
+papers/assets/paper2_state_process.png
+
 # Office temporary and QA render files
 ~$*
 submission/qa/

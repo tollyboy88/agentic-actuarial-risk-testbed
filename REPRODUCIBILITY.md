@@ -6,11 +6,10 @@ Use Python 3.11 or newer. From the repository root:
 python -m venv .venv
 .venv\Scripts\python -m pip install -e ".[test]"
 .venv\Scripts\python scripts\reproduce_naaj.py
-.venv\Scripts\python scripts\reproduce_saj.py
 .venv\Scripts\pytest
 ```
 
-The NAAJ profile writes its frozen experiment to `outputs/naaj_final/`; the Bayesian methodology pipeline writes `outputs/saj_methodology/`. Each pipeline records machine-readable tables and a SHA-256 manifest. The checked-in `outputs/scaled/` run is the fixed input for Paper 2 so that statistical-method development does not silently change the Paper 1 experimental engine.
+The NAAJ profile writes its frozen experiment to `outputs/naaj_final/` and records machine-readable tables plus a SHA-256 manifest. The separate Paper 2 methodology is maintained at https://github.com/tollyboy88/bayesian-multistate-actuarial-workflows and cites the same Zenodo dataset archive.
 
 Data archive: https://doi.org/10.5281/zenodo.22821051  
 Source repository: https://github.com/tollyboy88/agentic-actuarial-risk-testbed
