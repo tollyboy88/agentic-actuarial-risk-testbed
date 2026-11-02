@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Automated actuarial workflows can propagate a local data, tool, judgement, hand-off, context or adversarial fault into a material reserve misstatement. This article introduces a reproducible fault-injection testbed that executes six auditable reserving stages, pairs each faulty trajectory with a same-world clean counterfactual, and compares automated and human control architectures with restore-and-replay recovery. The fixed screening design contains 1,024 runs across eight synthetic insurer worlds. Per-stage validation reduced silent failure from 81.7% in the unreviewed chain to 2.5%, but a 135-scenario sensitivity grid showed that the lowest-risk control was not invariant: the validator ranked first in 40.0% of scenarios, a two-checkpoint human design in 31.1%, and the supervisor in 28.9%. Removing replay increased unresolved validator failures from 0.8% to 40.0%. A retrospective CLRD2025 experiment across six lines of business produced mean absolute errors of 6.2% for Chain Ladder, 8.9% for Bornhuetter–Ferguson and 26.3% for latest paid. Adding a local scale-consistency control increased detection of injected ×1,000 unit faults from 22.7% to 74.0%. The contribution is an applied experimental and audit framework for control design, not an estimate of production language-model failure frequency or insurer regulatory capital. Code, configurations, tests and unrestricted reproduction materials are publicly archived.
+Automated actuarial workflows can propagate a local data, tool, judgement, hand-off, context or adversarial fault into a material reserve misstatement. This article introduces a reproducible fault-injection testbed that executes six auditable reserving stages, pairs each faulty trajectory with a same-world clean counterfactual, and compares automated and human control architectures with restore-and-replay recovery. The fixed screening design contains 1,024 runs across eight synthetic insurer worlds. Per-stage validation reduced silent failure from 81.7% in the unreviewed chain to 2.5%, but a 135-scenario sensitivity grid showed that the lowest-risk control was not invariant: the validator ranked first in 40.0% of scenarios, a two-checkpoint human design ranked first in 31.1%, and the supervisor ranked first in 28.9%. Removing replay increased unresolved validator failures from 0.8% to 40.0%. A retrospective CLRD2025 experiment across six lines of business produced mean absolute errors of 6.2% for Chain Ladder, 8.9% for Bornhuetter–Ferguson and 26.3% for latest paid. Adding a local scale-consistency control increased detection of injected ×1,000 unit faults from 22.7% to 74.0%. The contribution is an applied experimental and audit framework for control design, not an estimate of production language-model failure frequency or insurer regulatory capital. Code, configurations, tests and unrestricted reproduction materials are publicly archived.
 
 **Keywords:** actuarial artificial intelligence; fault injection; claims reserving; model risk; workflow controls
 
@@ -58,7 +58,7 @@ The F1 scenario includes a deliberately severe multiplication-by-1,000 unit faul
 
 Eight topology variants were evaluated: an unreviewed linear chain (T1); a typed validator after each stage (T2); a supervisor capable of checking and replaying the workflow (T3); a critic concentrated around model and selection decisions (T4); and human-checkpoint variants with zero, one, two, or three checkpoints (T5-K0 to T5-K3). Detection probabilities and costs are configuration parameters, not empirical claims. When a control detects an active fault, the system restores the last clean state and deterministically replays later stages.
 
-This architecture tests a practical proposition: detection is useful only if provenance and clean state make recovery possible. Logging alone may reveal an issue but does not undo contaminated calculations. Replay also reduces ambiguity about which downstream artifacts must be regenerated.
+This architecture tests a practical proposition: detection is useful only if provenance and clean state make recovery possible. Logging alone may reveal an issue but does not undo contaminated calculations. Replay also reduces ambiguity about which downstream artifacts must be regenerated (Figure 1; Tables 1–2).
 
 ### 3.4 Design and estimands
 
@@ -82,9 +82,9 @@ Validation gates test deterministic world reproduction, six finite stage snapsho
 
 ### 3.7 Public-data retrospective validation
 
-External mechanics were tested with the unrestricted CLRD2025 sample distributed by the open-source Chainladder project and originating in the Casualty Actuarial Society Loss Reserve Database (Casualty Actuarial Society, n.d.; Chainladder contributors, 2026). The file contains paid-loss development for commercial auto, medical malpractice, other liability, private-passenger auto, products liability, and workers compensation. After removing duplicate insurer-line-accident-year-development keys and invalid values, the experiment retained 772 insurer-line records.
+External mechanics were tested with the unrestricted CLRD2025 sample distributed by the open-source Chainladder project and originating in the Casualty Actuarial Society Loss Reserve Database (Casualty Actuarial Society, n.d.; Chainladder contributors, 2026). The file contains paid-loss development for commercial auto, medical malpractice, other liability, private-passenger auto, products liability, and workers compensation. After removing duplicate insurer–line–accident-year–development keys and invalid values, the experiment retained 772 insurer–line combinations.
 
-Calendar year 2007 was imposed as the valuation cutoff. Development visible by that date formed the lower triangle, while paid loss at development lag 10 was held out as retrospective ground truth. Portfolio estimates were produced by latest paid, volume-weighted Chain Ladder, the identical Mack Chain Ladder point estimate, and Bornhuetter–Ferguson using an expected loss ratio estimated only from mature accident years (Bornhuetter & Ferguson, 1972; Mack, 1993). Mack's contribution concerns distribution-free uncertainty; its point estimate is therefore not a fourth distinct forecast. Uncertainty was estimated by 100 insurer-cluster bootstrap resamples per line of business. This is a mechanics and cross-line robustness test, not a source of agent-fault frequencies.
+Calendar year 2007 was imposed as the valuation cutoff. Development visible by that date formed the observed upper triangle, while paid loss at development lag 10 was held out as retrospective ground truth. Portfolio estimates were produced by latest paid, volume-weighted Chain Ladder, the identical Mack Chain Ladder point estimate, and Bornhuetter–Ferguson using an expected loss ratio estimated only from mature accident years (Bornhuetter & Ferguson, 1972; Mack, 1993). Mack's contribution concerns distribution-free uncertainty; its point estimate is therefore not a fourth distinct forecast. Uncertainty was estimated by 100 insurer-cluster bootstrap resamples per line of business. This is a mechanics and cross-line robustness test, not a source of agent-fault frequencies.
 
 A complementary fault audit injected duplicate keys, negative paid values, development-year inconsistencies, missing development cells, and a multiplication-by-1,000 unit error into the 25 largest insurer triangles per line. Deterministic schema, sign, development, completeness, and extreme-increment checks were applied without access to restricted data.
 
@@ -100,7 +100,7 @@ Nine ablation runs removed schema/lineage validation, prompt sanitisation, the g
 
 ### 4.1 Detection and silent failure
 
-Across fault-injected runs, the validator detected 96.7% of faults, compared with 9.2% for the unreviewed linear topology. Fault-only silent-failure rates were 81.7% for linear, 2.5% for validator, 4.2% for supervisor, and 17.5% for critic. When the eight no-injected-fault baselines per topology were also counted, total silent-outcome rates were 82.0%, 7.8%, 9.4%, and 21.9%, respectively. The difference shows that controls can detect injected faults without eliminating ordinary model error or ambient data defects. The critic's concentration around model and selection decisions left more exposure to data, hand-off, context, and adversarial failures than the per-stage validator.
+Across fault-injected runs, the validator detected 96.7% of faults, compared with 9.2% for the unreviewed linear topology. Fault-only silent-failure rates were 81.7% for linear, 2.5% for validator, 4.2% for supervisor, and 17.5% for critic. When the eight no-injected-fault baselines per topology were also counted, total silent-outcome rates were 82.0%, 7.8%, 9.4%, and 21.9%, respectively. The difference shows that controls can detect injected faults without eliminating ordinary model error or ambient data defects. The critic's concentration around model and selection decisions left more exposure to data, hand-off, context, and adversarial failures than the per-stage validator (Figures 2–3; Table 3).
 
 Detection differed materially by fault class. The validator detected all semantic, hand-off, context, and adversarial faults in the screening design, 96.9% of tool faults, 91.7% of data faults, and 87.5% of reasoning faults. Small cell counts mean these are screening proportions, not stable population estimates. The result nevertheless shows how a fault-by-control matrix identifies residual weaknesses that a single average score conceals.
 
@@ -118,21 +118,21 @@ The median sector VaR 99.5% across topologies rose from approximately GBP 1.52 m
 
 ### 4.4 Sensitivity and ranking stability
 
-The principal control result was directionally robust, but its magnitude depended on assumed detection. When detection probabilities were scaled from 60% to 140% of base, validator detection rose from 89.2% (95% interval 84.2%–93.3%) to 100%, while unresolved failure fell from 5.0% (2.5%–6.7%) to 0%. The supervisor moved from 88.3% detection and 4.2% unresolved failure to 100% and 0%. In contrast, the unreviewed linear topology remained weak: unresolved failure changed only from 55.0% to 50.8% because it has few controls to scale.
+The principal control result was directionally robust, but its magnitude depended on assumed detection. When detection probabilities were scaled from 60% to 140% of base, validator detection rose from 89.2% (95% interval 84.2%–93.3%) to 100%, while unresolved failure fell from 5.0% (2.5%–6.7%) to 0%. The supervisor moved from 88.3% detection and 4.2% unresolved failure to 100% and 0%. In contrast, the unreviewed linear topology remained weak: unresolved failure changed only from 55.0% to 50.8% because it has few controls to scale (Figure 5).
 
 Capital levels were highly assumption-sensitive. Across all stresses, validator VaR ranged from GBP 12,000 to GBP 472,267; supervisor VaR ranged from GBP 11,000 to GBP 452,178. Linear VaR ranged from GBP 151.5 million to GBP 6.87 billion. These intervals and ranges reinforce that the monetary output is a scenario surface rather than an estimate.
 
-The lowest-VaR topology also changed: the validator ranked first in 40.0% of the 135 combinations, human K2 in 31.1%, and the supervisor in 28.9%. The defensible finding is therefore that structured validation/recovery dominates an unreviewed chain, not that one reviewed architecture is universally optimal.
+The lowest-VaR topology also changed: the validator ranked first in 40.0% of the 135 combinations; human K2 ranked first in 31.1%; and the supervisor ranked first in 28.9%. The defensible finding is therefore that structured validation/recovery dominates an unreviewed chain, not that one reviewed architecture is universally optimal (Figure 7; Table 6).
 
 ### 4.5 Public CLRD2025 validation
 
-Chain Ladder had mean absolute percentage error of 6.2% across the six lines, compared with 8.9% for Bornhuetter–Ferguson and 26.3% for latest paid. Cross-line performance was heterogeneous. Chain Ladder error was 0.008% for private-passenger auto, 0.16% for other liability, 0.31% for workers compensation, 1.99% for commercial auto, 5.54% for products liability, and 29.34% for medical malpractice. Bornhuetter–Ferguson reduced medical-malpractice error to 3.96% but increased products-liability error to 34.29%. The insurer-cluster intervals were correspondingly wider for the smaller and less stable lines. These results demonstrate functioning public-data mechanics while warning against a single universally preferred reserving method.
+Chain Ladder had mean absolute percentage error of 6.2% across the six lines, compared with 8.9% for Bornhuetter–Ferguson and 26.3% for latest paid. Cross-line performance was heterogeneous. Chain Ladder error was 0.008% for private-passenger auto, 0.16% for other liability, 0.31% for workers compensation, 1.99% for commercial auto, 5.54% for products liability, and 29.34% for medical malpractice. Bornhuetter–Ferguson reduced medical-malpractice error to 3.96% but increased products-liability error to 34.29%. The insurer-cluster intervals were correspondingly wider for the smaller and less stable lines. These results demonstrate functioning public-data mechanics while warning against a single universally preferred reserving method (Figure 4; Table 4).
 
-The legacy deterministic audit detected all duplicate-key, negative-paid, development-mismatch and missing-cell faults, but only 22.7% of multiplication-by-1,000 faults. A new local scale-consistency check compares the target cumulative payment with the median positive peer development value in the same accident year. With a deliberately conservative 100-fold threshold, unit-fault detection increased to 74.0%. The residual cases lacked a stable positive peer or did not cross the threshold, so unit metadata and reconciliation totals remain necessary.
+The legacy deterministic audit detected all duplicate-key, negative-paid, development-mismatch and missing-cell faults, but only 22.7% of multiplication-by-1,000 faults. A new local scale-consistency check compares the target cumulative payment with the median positive peer development value in the same accident year. With a deliberately conservative 100-fold threshold, unit-fault detection increased to 74.0%, raising overall detection across the 750 public-data injections to 94.8%. The residual cases lacked a stable positive peer or did not cross the threshold, so unit metadata and reconciliation totals remain necessary (Table 5).
 
 ### 4.6 Control ablation
 
-Removing the typed-stage validator reduced validator detection from 96.7% to 35.0% and increased unresolved failure from 0.8% to 34.2%. Keeping detection but disabling replay/recovery left detection at 96.7% while unresolved failure rose to 40.0%, directly supporting the distinction between finding a fault and reversing its effects. Removing supervisor review increased unresolved failure from 1.7% to 35.8%; removing three human checkpoints increased it from 5.0% to 58.3%.
+Removing the typed-stage validator reduced validator detection from 96.7% to 35.0% and increased unresolved failure from 0.8% to 34.2%. Keeping detection but disabling replay/recovery left detection at 96.7% while unresolved failure rose to 40.0%, directly supporting the distinction between finding a fault and reversing its effects. Removing supervisor review increased unresolved failure from 1.7% to 35.8%; removing three human checkpoints increased it from 5.0% to 58.3% (Figure 6; Table 7).
 
 Removing schema/lineage validation or prompt sanitisation alone did not change aggregate rates in this design because the overlapping typed-stage validator detected the same selected treatments. This is not evidence that those controls are redundant in production; it shows that the current screening design cannot separately identify their marginal contribution when a broad downstream validator remains active.
 
@@ -190,17 +190,15 @@ The strongest contribution is methodological. The testbed supplies a common, aud
 
 **AI-use disclosure.** OpenAI Codex was used to assist with software implementation, literature discovery, language editing, and preparation of submission files. The author remains responsible for verifying the analysis, references, and final text and for all claims in the submitted work.
 
-This manuscript cites Figure 1 for the complete architecture; Figures 2–7 for propagation, detection, public-data validation, sensitivity, ablation and ranking stability; and Tables 1–7 for the corresponding definitions and numerical results.
-
 ## References
 
 Amodei, D., Olah, C., Steinhardt, J., Christiano, P., Schulman, J., & Mané, D. (2016). Concrete problems in AI safety. arXiv. https://doi.org/10.48550/arXiv.1606.06565
 
 Basel Committee on Banking Supervision. (2021). Revisions to the principles for the sound management of operational risk. Bank for International Settlements. https://www.bis.org/bcbs/publ/d515.htm
 
-Böcker, K., & Klüppelberg, C. (2005). Operational VaR: A closed-form approximation. Risk, 18(12), 90–93.
+Böcker, K., & Klüppelberg, C. (2005). Operational VaR: A closed-form approximation. Risk, 18(12), 90–93. https://www.risk.net/risk-management/operational-risk/1508755/operational-risk-operational-var-closed-form-approximation
 
-Bornhuetter, R. L., & Ferguson, R. E. (1972). The actuary and IBNR. Proceedings of the Casualty Actuarial Society, 59, 181–195.
+Bornhuetter, R. L., & Ferguson, R. E. (1972). The actuary and IBNR. Proceedings of the Casualty Actuarial Society, 59, 181–195. https://www.casact.org/abstract/actuary-and-ibnr
 
 Casualty Actuarial Society. (n.d.). CAS Loss Reserve Database (NAIC loss reserving data). https://www.casact.org/publications-research/research/downloadable-programs-spreadsheets-and-workbooks
 
@@ -208,7 +206,7 @@ Chainladder contributors. (2026). Sample datasets: clrd2025. Chainladder-Python 
 
 Debenedetti, E., Zhang, J., Balunović, M., Beurer-Kellner, L., Fischer, M., & Tramèr, F. (2024). AgentDojo: A dynamic environment to evaluate prompt injection attacks and defenses for LLM agents. Advances in Neural Information Processing Systems, 37. https://doi.org/10.52202/079017-2636
 
-EIOPA. (2015). Guidelines on own risk and solvency assessment. European Insurance and Occupational Pensions Authority. https://www.eiopa.europa.eu/publications/guidelines-own-risk-and-solvency-assessment_en
+EIOPA. (2015). Guidelines on own risk and solvency assessment. European Insurance and Occupational Pensions Authority. https://www.eiopa.europa.eu/publications/guidelines-own-risk-solvency-assessment-orsa_en
 
 Embrechts, P., Klüppelberg, C., & Mikosch, T. (1997). Modelling extremal events for insurance and finance. Springer. https://doi.org/10.1007/978-3-642-33483-2
 
@@ -224,7 +222,7 @@ Gabrielli, A., Richman, R., & Wüthrich, M. V. (2020). Neural network embedding 
 
 Gebru, T., Morgenstern, J., Vecchione, B., Vaughan, J. W., Wallach, H., Daumé III, H., & Crawford, K. (2021). Datasheets for datasets. Communications of the ACM, 64(12), 86–92. https://doi.org/10.1145/3458723
 
-ISO. (2023). ISO/IEC 42001:2023 Information technology—Artificial intelligence—Management system. International Organization for Standardization. https://www.iso.org/standard/81230.html
+ISO. (2023). ISO/IEC 42001:2023 Information technology—Artificial intelligence—Management system. International Organization for Standardization. https://www.iso.org/standard/42001
 
 Kuo, K. (2019). DeepTriangle: A deep learning approach to loss reserving. Risks, 7(3), 97. https://doi.org/10.3390/risks7030097
 
@@ -240,13 +238,13 @@ Moscadelli, M. (2004). The modelling of operational risk: Experience with the an
 
 NIST. (2023). Artificial Intelligence Risk Management Framework (AI RMF 1.0) (NIST AI 100-1). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.AI.100-1
 
-NIST. (2024). Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile (NIST AI 600-1). National Institute of Standards and Technology. doi:10.6028/NIST.AI.600-1
+NIST. (2024). Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile (NIST AI 600-1). National Institute of Standards and Technology. https://doi.org/10.6028/NIST.AI.600-1
 
-OWASP Foundation. (2025). OWASP Top 10 for LLM applications 2025. Available at: genai.owasp.org/llm-top-10/
+OWASP Foundation. (2025). OWASP Top 10 for LLM applications 2025. https://genai.owasp.org/llm-top-10/
 
 Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., & Bernstein, M. S. (2023). Generative agents: Interactive simulacra of human behavior. Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology. https://doi.org/10.1145/3586183.3606763
 
-Prudential Regulation Authority. (2023). Model risk management principles for banks (Supervisory Statement SS1/23). Bank of England. https://www.bankofengland.co.uk/prudential-regulation/publication/2023/may/model-risk-management-principles-for-banks-supervisory-statement
+Prudential Regulation Authority. (2023). Model risk management principles for banks (Supervisory Statement SS1/23). Bank of England. https://www.bankofengland.co.uk/prudential-regulation/publication/2023/may/model-risk-management-principles-for-banks-ss
 
 Qin, Y., Liang, S., Ye, Y., Zhu, K., Yan, L., Lu, Y., Lin, Y., Cong, X., Tang, X., Qian, B., Zhao, S., Tian, R., Xie, R., Zhou, J., Gerstein, M., Li, D., Liu, Z., & Sun, M. (2024). ToolLLM: Facilitating large language models to master 16000+ real-world APIs. International Conference on Learning Representations. https://openreview.net/forum?id=dHng2O0Jjr
 
@@ -254,13 +252,13 @@ Raji, I. D., Smart, A., White, R. N., Mitchell, M., Gebru, T., Hutchinson, B., S
 
 Sambasivan, N., Kapania, S., Highfill, H., Akrong, D., Paritosh, P., & Aroyo, L. M. (2021). “Everyone wants to do the model work, not the data work”: Data cascades in high-stakes AI. Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems. https://doi.org/10.1145/3411764.3445518
 
-Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D., Chaudhary, V., Young, M., Crespo, J.-F., & Dennison, D. (2015). Hidden technical debt in machine learning systems. Advances in Neural Information Processing Systems, 28.
+Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D., Chaudhary, V., Young, M., Crespo, J.-F., & Dennison, D. (2015). Hidden technical debt in machine learning systems. Advances in Neural Information Processing Systems, 28. https://proceedings.neurips.cc/paper_files/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html
 
 Shinn, N., Cassano, F., Gopinath, A., Narasimhan, K., & Yao, S. (2023). Reflexion: Language agents with verbal reinforcement learning. Advances in Neural Information Processing Systems, 36, 8634–8652.
 
 Wu, Q., Bansal, G., Zhang, J., Wu, Y., Li, B., Zhu, E., Jiang, L., Zhang, X., Zhang, S., Liu, J., Awadallah, A. H., White, R. W., Burger, D., & Wang, C. (2023). AutoGen: Enabling next-gen LLM applications via multi-agent conversation. arXiv. https://doi.org/10.48550/arXiv.2308.08155
 
-Wüthrich, M. V., & Merz, M. (2008). Stochastic claims reserving methods in insurance. Wiley. https://doi.org/10.1002/9780470723834
+Wüthrich, M. V., & Merz, M. (2008). Stochastic claims reserving methods in insurance. Wiley. https://www.wiley.com/en-us/Stochastic+Claims+Reserving+Methods+in+Insurance-p-9780470772720
 
 Xi, Z., Chen, W., Guo, X., He, W., Ding, Y., Hong, B., Zhang, M., Wang, J., Jin, S., Zhou, E., Zheng, R., Fan, X., Wang, X., Xiong, L., Zhou, Y., Wang, W., Jiang, C., Zou, Y., Liu, X., Yin, Z., Dou, S., Weng, R., Cheng, W., Zhang, Q., Qin, W., Zheng, Y., Qiu, X., Huang, X., & Gui, T. (2023). The rise and potential of large language model based agents: A survey. arXiv. https://doi.org/10.48550/arXiv.2309.07864
 

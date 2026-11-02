@@ -310,15 +310,17 @@ def build_reviewer_revision(config_path: str | Path = "configs/scaled.yaml") -> 
     detection, capital = run_parameter_sensitivity(config, output)
     ablation = run_ablation(config, output)
     ranking = pd.read_csv(output / "tables" / "ranking_stability.csv")
+    fault_column = "fault_type" if "fault_type" in audit.columns else "fault"
+    unit = audit.loc[audit[fault_column] == "unit_x1000"]
     summary = f"""# Reviewer revision analyses
 
 ## Public actuarial validation
 
-The CAS CLRD2025 retrospective test uses {validation['lob'].nunique()} lines of business and {int(validation.groupby('lob')['insurers'].first().sum())} insurer-line records. Development through calendar year 2007 is treated as observed; development through lag 10 is retrospective ground truth. Chain Ladder, Mack Chain Ladder point estimates, Bornhuetter-Ferguson and latest-paid baselines are compared. Insurer-cluster bootstrap intervals use {int(bootstrap['iteration'].nunique())} resamples per line.
+The CAS CLRD2025 retrospective test uses {validation['lob'].nunique()} lines of business and {int(validation.groupby('lob')['insurers'].first().sum())} insurer–line combinations. Development through calendar year 2007 forms the observed upper triangle; development through lag 10 is retrospective ground truth. Chain Ladder, Mack Chain Ladder point estimates, Bornhuetter-Ferguson and latest-paid baselines are compared. Insurer-cluster bootstrap intervals use {int(bootstrap['iteration'].nunique())} resamples per line.
 
 ## Public-data fault audit
 
-The deterministic schema, sign, development-consistency, completeness and extreme-increment checks detected {audit['detected'].mean():.1%} of {len(audit):,} injected CLRD faults across six lines of business.
+The deterministic schema, sign, development-consistency, completeness, extreme-increment and local scale-consistency checks detected {audit['detected'].mean():.1%} of {len(audit):,} injected CLRD faults across six lines of business. The local scale-consistency check detected {unit['detected'].mean():.1%} of injected ×1,000 unit faults.
 
 ## Sensitivity and uncertainty
 
