@@ -85,8 +85,8 @@ def main() -> None:
         "03_title_page.docx", "04_cover_letter.docx",
         "05_supplement_proofs_diagnostics.docx", "06_replication_readme.docx",
     }
-    assert {path.name for path in P1.glob("*.docx")} == expected_p1
-    assert {path.name for path in P2.glob("*.docx")} == expected_p2
+    assert {path.name for path in P1.glob("*.docx") if not path.name.startswith("~$")} == expected_p1
+    assert {path.name for path in P2.glob("*.docx") if not path.name.startswith("~$")} == expected_p2
     check_anonymous(P1 / "02_anonymous_manuscript.docx")
     check_anonymous(P1 / "04_anonymous_supplementary_material.docx")
     check_anonymous(P2 / "01_main_manuscript_anonymous.docx")
